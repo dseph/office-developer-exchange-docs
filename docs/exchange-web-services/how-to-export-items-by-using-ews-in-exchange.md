@@ -5,7 +5,7 @@ title: "Export items by using EWS in Exchange"
 manager: sethgros
 ms.date: 11/16/2014
 ms.audience: Developer
- 
+
  
 ms.assetid: e93ee68c-e134-4469-9070-fba404d46cb4
 description: "Learn how to export appointments, emails, contacts, tasks, and other items by using the EWS Managed API or EWS in Exchange."
@@ -87,7 +87,7 @@ The server responds to the **ExportItems** request with an [ExportItemsResponse]
 ```
 
 > [!IMPORTANT]
-> It is possible for data to be truncated in some uncommon scenarios.  If this happens, the EWS response will contain the string "=== Truncated Data ===" at the end.  The client application should treat this as a transient error and retry the request.
+> It is possible for data to be truncated due to normal processing in Exchange Online.  If this happens, the EWS response will contain the string "=== Truncated Data ===" at the end of the data steam in the response - no http error code is returned.  The client application should treat this as a transient error and retry the request using an exponential back-off until the issue goes away. Note that there are many causes of this issue and the call should eventually work; however, it could take minutes to hours before the truncation issues stops reproducing. Any issue which could affect the processing of the response stream on our servers could cause this issue. 
 
 ## Use the MIME stream to export into common file formats
 <a name="bk_exportfullfidelity"> </a>

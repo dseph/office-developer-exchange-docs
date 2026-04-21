@@ -256,8 +256,11 @@ The following elements are used in the error response:
 - **Value**
     
 > [!NOTE]
-> The **Value** element does not exist in the schema. This element is valid because the [MessageXml](messagexml.md) element, in which the **Value** instance element occurs, can contain any well-formed XML. 
-  
+> The **Value** element does not exist in the schema. This element is valid because the [MessageXml](messagexml.md) element, in which the **Value** instance element occurs, can contain any well-formed XML.
+> 
+> [!IMPORTANT]
+> It's possible for data to be truncated in normal servicing scenarios. This can happen due to anything which could cause the gathering of the data to fail, including mailbox failovers, server failovers, networking issues, maintenance operations and more.  If this happens, the EWS response will contain the string "=== Truncated Data ===" at the end.  To address this issue, the client application should treat this as a transient error and retry the request until the issue goes away. Note that it may take many retries and could take minutes to hours before the issue goes away. Use exponential backoffs retries until this goes away. If the issue goes over eight hours, then open a support case on this issue. 
+    
 ## See also
 
 
